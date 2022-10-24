@@ -1,0 +1,3 @@
+[submodule "watchlist"]
+	path = watchlist
+	url = git@gitlab.com:DarKreter/k8d.server.yt_watchlist.git
