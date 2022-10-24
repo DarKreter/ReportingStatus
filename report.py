@@ -3,6 +3,7 @@ import discord
 from client import client
 from TOKEN import TOKEN
 
+from utils import run_blocking
 from functions import check_playlists
 import globalVar
 globalVar.init()
@@ -19,7 +20,10 @@ async def on_ready():
     await client.change_presence(status=discord.Status.online, activity=game)
     
     # Do everything here
-    await check_playlists()
+    
+    # Checking missing files in playlist
+    await run_blocking(check_playlists)
+    
 
     # globalVar.report_message.add_field(name="‎", value="", inline=False)
 

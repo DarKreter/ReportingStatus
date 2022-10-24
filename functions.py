@@ -4,7 +4,8 @@ from client import client
 import globalVar
 from playlist_checker import get_missing_files
 
-async def check_playlists():
+
+def check_playlists():
     missing_files = get_missing_files()
 
     # missing_files = [('「KDABAMV」', 'Akame Ga Kill - Natural 「KDABAMV」'), ('「KDABAMV」', 'Anime MIX - Surrender 「KDABAMV」')]
