@@ -34,7 +34,7 @@ def check_playlist(url, path, typee):
     
     return deleted_files
 
-def check_playlists():
+def get_missing_files():
     # Read watched playlists
     df = pd.read_csv('watchlist/playlists.csv', delimiter=';')
     mydict = df.to_dict(orient='list')

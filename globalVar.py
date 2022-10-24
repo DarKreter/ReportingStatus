@@ -1,9 +1,9 @@
-def init():    
-    global report_message
-    report_message = ""
-    
-GuildID = 778179304454356992
-ChannelID = 778179304454356995
+import datetime
+import discord
+import random
+
+GuildID = 698673052447145986
+ChannelID = 1034119438577971220
 BakuganID = 324627270478200832
 MinetaID = 369551883817320448
 
@@ -28,3 +28,14 @@ _love_gifs = ["https://media.tenor.com/45Z2kLVzfNsAAAAM/ily-i-love-you.gif",
               "https://media4.giphy.com/media/LML5ldpTKLPelFtBfY/200.gif?cid=82a1493buun1gq9vct6gpzrzmf0xqajph86el2qm2ahl333g&rid=200.gif&ct=g",
               "https://i.imgur.com/w2AsgSW.gif?noredirect",
               "https://media.tenor.com/FSLoxixwzPkAAAAd/monika-ddlc.gif"]
+
+
+def init():    
+    global report_message
+    report_message = discord.Embed(   title=_title, 
+                                                description=_description,
+                                                color=_color,
+                                                timestamp=datetime.datetime.now(),
+                                                url = "https://www.kilimandzaro.com")
+    report_message.set_image(url = random.choice(_love_gifs))
+    report_message.set_footer(text = _footer)

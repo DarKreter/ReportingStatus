@@ -2,25 +2,21 @@ import discord
 from unidecode import unidecode
 from client import client
 import globalVar
-# from globalVar import *
+from playlist_checker import get_missing_files
 
+async def check_playlists():
+    missing_files = get_missing_files()
 
-# Called when bot is ready 
-@client.event
-async def on_ready():
-    # Debug info
-    print('We have logged in as {0.user}'.format(client))
+    # missing_files = [('「KDABAMV」', 'Akame Ga Kill - Natural 「KDABAMV」'), ('「KDABAMV」', 'Anime MIX - Surrender 「KDABAMV」')]
+    # missing_files = []
+
+    if len(missing_files) == 0:
+        _value = "__Everything is up to date!__ （＾ω＾）"
+    else:
+        _value = "Some videos are **__missing__**: (๑˃̣̣̥⌓˂̣̣̥)\n\n"
+        for playlist, title in missing_files:
+            _value+="'**{}**' from '**{}**'!\n".format(title,playlist)
+            
+        
+    globalVar.report_message.add_field(name="**YOUTUBE PLAYLISTS STATUS:**", value=_value, inline=False)
     
-    game = discord.Game("with your mom")
-    await client.change_presence(status=discord.Status.online, activity=game)
-    
-    
-    for ch in client.get_guild(globalVar.GuildID).channels:
-        if ch.id == globalVar.ChannelID:
-            channel = ch
-
-
-
-    await channel.send(embed=globalVar.report_message)
-
-    await client.close()
