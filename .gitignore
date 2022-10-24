@@ -4,3 +4,4 @@
 *.srt
 __pycache__
 log.txt
+TOKEN.py
