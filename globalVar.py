@@ -10,6 +10,7 @@ MinetaID = 369551883817320448
 _title = "**Here is report of my __current state__:**"
 _footer = "Send with love to my master\n"
 _description = "‎\n"
+_mention = "Hear me out! <@{}> <@{}>\n‎".format(BakuganID, MinetaID)
 _color = 0xe0a2e6
 
 
@@ -31,6 +32,8 @@ _love_gifs = ["https://media.tenor.com/45Z2kLVzfNsAAAAM/ily-i-love-you.gif",
 
 
 def init():    
+    global attachment
+    attachment = ""
     global report_message
     report_message = discord.Embed(   title=_title, 
                                                 description=_description,

@@ -23,6 +23,7 @@ async def on_ready():
     
     # Checking missing files in playlist
     await run_blocking(check_playlists)
+    # await run_blocking(check_zfs_pools)
     
 
     # globalVar.report_message.add_field(name="‎", value="", inline=False)
@@ -32,7 +33,10 @@ async def on_ready():
         if ch.id == globalVar.ChannelID:
             channel = ch
     # Write to channel
-    await channel.send(embed=globalVar.report_message)
+
+    await channel.send(content=globalVar._mention, embed=globalVar.report_message)
+    if globalVar.attachment != "":
+        await channel.send(file=discord.File(globalVar.attachment))
 
     # exit
     await client.close()
