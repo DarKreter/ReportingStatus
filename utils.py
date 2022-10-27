@@ -1,7 +1,13 @@
 import os
+import subprocess
 import typing 
 import functools
 from client import client
+
+def executeBashCommand(bashCommand):
+    process = subprocess.Popen(bashCommand, stdout=subprocess.PIPE)
+    output, error = process.communicate()
+    return output
 
 def get_files_from_path(path, typee):
     if typee == 'video':

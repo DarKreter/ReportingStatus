@@ -4,7 +4,7 @@ from client import client
 from TOKEN import TOKEN
 
 from utils import run_blocking
-from functions import check_playlists
+from functions import *
 import globalVar
 globalVar.init()
 
@@ -22,8 +22,8 @@ async def on_ready():
     # Do everything here
     
     # Checking missing files in playlist
+    await run_blocking(check_zfs_pools)
     await run_blocking(check_playlists)
-    # await run_blocking(check_zfs_pools)
     
 
     # globalVar.report_message.add_field(name="‎", value="", inline=False)

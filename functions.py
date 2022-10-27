@@ -3,6 +3,7 @@ from unidecode import unidecode
 from client import client
 import globalVar
 from playlist_checker import get_missing_files
+import utils
 
 
 def check_playlists():
@@ -31,8 +32,14 @@ def check_playlists():
     globalVar.report_message.add_field(name="**YOUTUBE PLAYLISTS STATUS:**", value=_value, inline=False)
     
 
-# def check_zfs_pools():
-    
-#     globalVar.report_message.add_field(name="**ZFS POOLS STATUS:**", value=_value, inline=False)
+def check_zfs_pools():
+    command = ["./zpool_status.sh"]
+    output = utils.executeBashCommand(command).decode("utf-8").split("\n")
+    # _value = "‎\n"
+    _value = ""
+    for i in range(0, len(output)-1, 2):
+        _value+="**{}**: __{}__\n".format(output[i], output[i+1])
+    _value += "‎\n"
+    globalVar.report_message.add_field(name="**ZFS POOLS STATUS:**", value=_value, inline=False)
     
     
