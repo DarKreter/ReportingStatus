@@ -43,3 +43,21 @@ def check_zfs_pools():
     globalVar.report_message.add_field(name="**ZFS POOLS STATUS:**", value=_value, inline=False)
     
     
+def check_supervisor():
+    command = ["supervisorctl", "status"]
+    output = utils.executeBashCommand(command).decode("utf-8").split("\n")
+    # _value = "‎\n"
+    _value = ""
+    for line in output[:-1]:
+        # remove empty elements of splitted string
+        line = [x for x in line.split(" ") if x]
+        name = line[0]
+        state = line[1]
+        line.pop(0)
+        line.pop(0)
+        
+        _value+="**{}**: __{}__, {}\n".format(name, state, " ".join(line))
+    _value += "‎\n"
+    globalVar.report_message.add_field(name="**SUPERVISOR STATUS:**", value=_value, inline=False)
+    
+    
