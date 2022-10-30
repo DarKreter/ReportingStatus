@@ -7,10 +7,10 @@ import utils
 
 
 def check_playlists():
-    missing_files = get_missing_files()
+    # missing_files = get_missing_files()
 
     # missing_files = [('「KDABAMV」', 'Akame Ga Kill - Natural 「KDABAMV」'), ('「KDABAMV」', 'Anime MIX - Surrender 「KDABAMV」')]
-    # missing_files = []
+    missing_files = []
 
     if len(missing_files) == 0:
         _value = "__Everything is up to date!__ （＾ω＾）"
@@ -31,7 +31,6 @@ def check_playlists():
         
     globalVar.report_message.add_field(name="**YOUTUBE PLAYLISTS STATUS:**", value=_value, inline=False)
     
-
 def check_zfs_pools():
     command = ["./zpool_status.sh"]
     output = utils.executeBashCommand(command).decode("utf-8").split("\n")
@@ -41,7 +40,8 @@ def check_zfs_pools():
         _value+="**{}**: __{}__\n".format(output[i], output[i+1])
     _value += "‎\n"
     globalVar.report_message.add_field(name="**ZFS POOLS STATUS:**", value=_value, inline=False)
-    
+
+ 
     
 def check_supervisor():
     command = ["supervisorctl", "status"]

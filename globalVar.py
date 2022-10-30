@@ -1,6 +1,7 @@
 import datetime
 import discord
 import random
+from utils import executeBashCommand
 
 GuildID = 698673052447145986
 ChannelID = 1034119438577971220
@@ -9,7 +10,7 @@ MinetaID = 369551883817320448
 
 _title = "**Here is report of my __current state__:**"
 _footer = "Send with love to my master\n"
-_description = "‎\n"
+_description = ""
 _mention = "Hear me out! <@{}> <@{}>\n‎".format(BakuganID, MinetaID)
 _color = 0xe0a2e6
 
@@ -35,6 +36,10 @@ def init():
     global attachment
     attachment = ""
     global report_message
+    command = ["uptime", "--pretty"]
+    output = executeBashCommand(command).decode("utf-8").split("\n")[0][3:]
+    _description = "With uptime: *{}*\n‎\n".format(output)
+    
     report_message = discord.Embed(   title=_title, 
                                                 description=_description,
                                                 color=_color,
