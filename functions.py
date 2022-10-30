@@ -41,7 +41,19 @@ def check_zfs_pools():
     _value += "‎\n"
     globalVar.report_message.add_field(name="**ZFS POOLS STATUS:**", value=_value, inline=False)
 
- 
+def check_automatic_script_execution_time():
+    scripts = [("YouTube autodownload", "k8d.server.yt_autodownload/log.txt"), 
+               ("Anime smart backup", "k8d.server.smart_backup/log.txt")]
+    _value = ""
+    
+    for name, script in scripts:
+        command = "stat -c '%y' /home/kretes/{}".format(script).split(" ")
+        output = utils.executeBashCommand(command).decode("utf-8").split('.')[0][1:]
+        _value+="**{}**: *{}*\n".format(name, output)
+        
+    _value += "‎\n"
+    globalVar.report_message.add_field(name="**Last execution of automatic scripts:**", value=_value, inline=False)
+
     
 def check_supervisor():
     command = ["supervisorctl", "status"]
