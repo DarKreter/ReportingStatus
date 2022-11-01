@@ -22,7 +22,7 @@ async def on_ready():
     # Do everything here
     
     # Checking missing files in playlist
-    await run_blocking(check_zfs_pools)
+    await run_blocking(check_disks)
     await run_blocking(check_supervisor)
     await run_blocking(check_automatic_script_execution_time)
     await run_blocking(check_playlists)
