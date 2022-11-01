@@ -109,3 +109,23 @@ def check_diskspace():
 def check_disks():
     check_zfs_pools()
     check_diskspace()
+    
+    
+def check_docker():
+    command = ["./docker_check.sh"]
+    output = utils.executeBashCommand(command).decode("utf-8").split("\n")
+    # _value = "‎\n"
+    names = ""
+    stats = ""
+    for line in output[:-1]:
+        # remove empty elements of splitted string
+        line = line.split("~")
+        names += "**{}**\n".format(line[0])
+        stats += "__{}__\n".format(line[1])
+        
+    names += "‎\n"
+    globalVar.report_message.add_field(name="**DOCKER CONTAINERS:**", value="̿ ̿ ̿'̿'\̵͇̿̿\з=(•_•)=ε/̵͇̿̿/'̿'̿ ̿ ", inline=False)
+    globalVar.report_message.add_field(name="Container", value=names, inline=True)
+    globalVar.report_message.add_field(name="Status", value=stats, inline=True)
+
+    
