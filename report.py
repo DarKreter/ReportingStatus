@@ -25,6 +25,7 @@ async def on_ready():
     await run_blocking(check_disks)
     await run_blocking(check_docker)
     await run_blocking(check_supervisor)
+    await run_blocking(check_wireguard)
     await run_blocking(check_automatic_script_execution_time)
     await run_blocking(check_playlists)
     

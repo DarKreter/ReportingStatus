@@ -129,3 +129,24 @@ def check_docker():
     globalVar.report_message.add_field(name="Status", value=stats, inline=True)
 
     
+    
+ 
+def check_wireguard():
+    command = ["sudo", "./wireguard_status.sh"]
+    output = utils.executeBashCommand(command).decode("utf-8").split("\n")
+    _value = output[0]
+    who = ""
+    handshake = ""
+    transfer = ""
+    for i in range(1, len(output)-1, 3):
+        who += "**{}**\n".format(output[i])
+        handshake += "__{}__\n".format(output[i+1][18:])
+        transfer += "__{}__\n".format(output[i+2][10:])
+    who += "‎\n"
+    globalVar.report_message.add_field(name="**WIREGUARD STATUS:**", value=_value, inline=False)
+    if _value == "Wireguard is up!" and len(transfer) != 0:
+        globalVar.report_message.add_field(name="Person", value=who, inline=True)
+        globalVar.report_message.add_field(name="Latest handshake", value=handshake, inline=True)
+        globalVar.report_message.add_field(name="Transfer", value=transfer, inline=True)
+
+    
