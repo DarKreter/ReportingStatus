@@ -7,9 +7,9 @@ import utils
 
 
 def check_playlists():
-    missing_files = []
+    # missing_files = []
     # missing_files = [('「KDABAMV」', 'Akame Ga Kill - Natural 「KDABAMV」'), ('「KDABAMV」', 'Anime MIX - Surrender 「KDABAMV」')]
-    # missing_files = get_missing_files()
+    missing_files = get_missing_files()
 
 
     if len(missing_files) == 0:
