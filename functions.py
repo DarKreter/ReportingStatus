@@ -7,9 +7,9 @@ import utils
 
 
 def check_playlists():
-    # missing_files = []
+    missing_files = []
     # missing_files = [('「KDABAMV」', 'Akame Ga Kill - Natural 「KDABAMV」'), ('「KDABAMV」', 'Anime MIX - Surrender 「KDABAMV」')]
-    missing_files = get_missing_files()
+    # missing_files = get_missing_files()
 
 
     if len(missing_files) == 0:
@@ -64,7 +64,7 @@ def check_supervisor():
     globalVar.report_message.add_field(name="**SUPERVISOR STATUS:**", value=_value, inline=False)
     
 def check_zfs_pools():
-    command = ["./zpool_status.sh"]
+    command = ["bash/zpool_status.sh"]
     output = utils.executeBashCommand(command).decode("utf-8").split("\n")
 
     names = ""
@@ -80,7 +80,7 @@ def check_zfs_pools():
     
   
 def check_diskspace():
-    command = ["./disk_usage.sh"]
+    command = ["bash/disk_usage.sh"]
     output = utils.executeBashCommand(command).decode("utf-8").split("\n")
     # _value = "‎\n"
     names = ""
@@ -112,7 +112,7 @@ def check_disks():
     
     
 def check_docker():
-    command = ["./docker_check.sh"]
+    command = ["bash/docker_check.sh"]
     output = utils.executeBashCommand(command).decode("utf-8").split("\n")
     # _value = "‎\n"
     names = ""
@@ -132,7 +132,7 @@ def check_docker():
     
  
 def check_wireguard():
-    command = ["sudo", "./wireguard_status.sh"]
+    command = ["sudo", "bash/wireguard_status.sh"]
     output = utils.executeBashCommand(command).decode("utf-8").split("\n")
     _value = output[0]
     who = ""
