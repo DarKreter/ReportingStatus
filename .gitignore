@@ -3,6 +3,6 @@
 *.mkv
 *.srt
 __pycache__
-log.txt
+*.log
 TOKEN.py
 missing_amv.txt

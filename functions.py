@@ -7,9 +7,9 @@ import utils
 
 
 def check_playlists():
-    missing_files = []
+    # missing_files = []
     # missing_files = [('「KDABAMV」', 'Akame Ga Kill - Natural 「KDABAMV」'), ('「KDABAMV」', 'Anime MIX - Surrender 「KDABAMV」')]
-    # missing_files = get_missing_files()
+    missing_files = get_missing_files()
 
 
     if len(missing_files) == 0:
@@ -33,8 +33,8 @@ def check_playlists():
     
 
 def check_automatic_script_execution_time():
-    scripts = [("YouTube autodownload", "k8d.server.yt_autodownload/log.txt"), 
-               ("Anime smart backup", "k8d.server.smart_backup/log.txt")]
+    scripts = [("YouTube autodownload", "k8d.server.yt_autodownload/stdout.log"), 
+               ("Anime smart backup", "k8d.server.smart_backup/stdout.log")]
     _value = ""
     
     for name, script in scripts:
@@ -140,10 +140,10 @@ def check_wireguard():
     transfer = ""
     for i in range(1, len(output)-1, 3):
         who += "**{}**\n".format(output[i])
-        handshake += "__{}__\n".format(output[i+1][18:])
-        transfer += "__{}__\n".format(output[i+2][10:])
+        handshake += "{}\n".format(output[i+1][18:])
+        transfer += "{}\n".format(output[i+2][10:])
     who += "‎\n"
-    globalVar.report_message.add_field(name="**WIREGUARD STATUS:**", value=_value, inline=False)
+    globalVar.report_message.add_field(name="**WIREGUARD STATUS:**", value="__{}__".format(_value), inline=False)
     if _value == "Wireguard is up!" and len(transfer) != 0:
         globalVar.report_message.add_field(name="Person", value=who, inline=True)
         globalVar.report_message.add_field(name="Latest handshake", value=handshake, inline=True)
