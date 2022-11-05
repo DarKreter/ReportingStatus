@@ -7,6 +7,7 @@ GuildID = 698673052447145986
 ChannelID = 1034119438577971220
 BakuganID = 324627270478200832
 MinetaID = 369551883817320448
+OwnID = 1034071229394591794
 
 _title = "**Here is report of my __current state__:**"
 _footer = "Send with love to my master"

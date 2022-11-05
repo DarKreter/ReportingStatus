@@ -11,7 +11,6 @@ def check_playlists():
     # missing_files = [('「KDABAMV」', 'Akame Ga Kill - Natural 「KDABAMV」'), ('「KDABAMV」', 'Anime MIX - Surrender 「KDABAMV」')]
     missing_files = get_missing_files()
 
-
     if len(missing_files) == 0:
         _value = "__Everything is up to date!__ （＾ω＾）"
     else:
@@ -139,7 +138,7 @@ def check_wireguard():
     handshake = ""
     transfer = ""
     for i in range(1, len(output)-1, 3):
-        who += "**{}**\n".format(output[i])
+        who += "**{}**\n‎\n".format(output[i])
         handshake += "{}\n".format(output[i+1][18:])
         transfer += "{}\n".format(output[i+2][10:])
     who += "‎\n"

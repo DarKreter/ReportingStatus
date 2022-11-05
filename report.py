@@ -16,9 +16,8 @@ async def on_ready():
     print('We have logged in as {0.user}'.format(client))
     
     # game status
-    game = discord.Game("with your mom")
-    await client.change_presence(status=discord.Status.online, activity=game)
-    
+    activity = discord.Activity(type=discord.ActivityType.watching, name="your server dying")
+    await client.change_presence(status=discord.Status.online, activity=activity)    # client.change_presence(activity=discord.Activity(type=discord.ActivityType.watching, name='The Boys'))
     # Do everything here
     
     # Checking missing files in playlist
@@ -29,7 +28,7 @@ async def on_ready():
     await run_blocking(check_automatic_script_execution_time)
     await run_blocking(check_playlists)
     
-
+    
     # globalVar.report_message.add_field(name="‎", value="", inline=False)
 
     # find channel to write
