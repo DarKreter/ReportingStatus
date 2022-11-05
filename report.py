@@ -40,6 +40,8 @@ async def on_ready():
     await channel.send(content=globalVar._mention, embed=globalVar.report_message)
     if globalVar.attachment != "":
         await channel.send(file=discord.File(globalVar.attachment))
+        command = ["rm", globalVar.attachment]
+        executeBashCommand(command).decode("utf-8")
 
     # exit
     await client.close()

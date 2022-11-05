@@ -29,7 +29,7 @@ async def on_message(message):
     messWWS = messLC.replace(" ", "").replace("\t", "").replace("\n", "") # messWithoutWhiteSpaces
     
     # Check if someone tagged BOTan
-    if messLC.find('kilimanjaro-chan') != -1 or originalMess == "<@{}>".format(OwnID):
+    if messLC.find('kilimanjaro-chan') != -1 or originalMess.find("<@{}>".format(OwnID)) != -1:
         await message.channel.send("Don't you worry, somehow I'm still alive...")
 
     elif messLC == "!report":
