@@ -3,7 +3,7 @@ import discord
 from client import client
 from TOKEN import TOKEN
 
-from utils import run_blocking
+from utils import run_blocking, executeBashCommand
 from functions import *
 import globalVar
 globalVar.init()
