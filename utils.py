@@ -20,6 +20,17 @@ def get_files_from_path(path, typee):
         for entry in entries:
             if entry.name[len(entry.name) - len(ext):] == ext:
                 files_list.append(entry.name[:-(len(ext)+1)])
+                
+    exclude = path + '.exclude.txt'
+    if os.path.isfile(exclude):
+        file = open(exclude, 'r')
+        lines = file.read().splitlines()
+        file.close()
+        
+        for line in lines:
+            if line in files_list:
+                files_list.remove(line)
+    
     return files_list
 
 
