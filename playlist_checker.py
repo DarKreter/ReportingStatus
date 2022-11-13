@@ -13,7 +13,8 @@ def get_files_from_url(playlist_url, typee):
     file_list = manager.list()
     lock = multiprocessing.Lock()
     
-    for video in playlist.videos:
+    for url in playlist.video_urls:
+        video = YouTube(url, use_oauth=True, allow_oauth_cache=True)
         process = multiprocessing.Process(target=check_single_url, args=(video, typee, file_list,lock,))
         process.start()
         threads.append(process)
@@ -23,16 +24,22 @@ def get_files_from_url(playlist_url, typee):
         
     return file_list  
 
-def check_single_url(video, typee, file_list,lock):
-    if typee == 'video':
-        default_filename = video.streams.filter(only_video=True).order_by('resolution').desc()[0].default_filename
-    elif typee == 'audio':
-        default_filename = video.streams.filter(only_audio=True).order_by('abr').desc()[0].default_filename
+def check_single_url(video, typee, file_list, lock):
+    try:
+        if typee == 'video':
+            df = video.streams.filter(only_video=True).order_by('resolution').desc()[0].default_filename
+        elif typee == 'audio':
+            df = video.streams.filter(only_audio=True).order_by('abr').desc()[0].default_filename
+            
+        filename = df.split('.')[0]
         
-    filename = default_filename.split('.')[0]
+        with lock:
+            file_list.append(filename)
+            
+    except Exception as e:
+            print('Error proccessing this video!')
+            print(e)
     
-    with lock:
-        file_list.append(filename)
     
     
 
@@ -62,6 +69,10 @@ def get_missing_files():
         paths = mydict['path']
         urls = mydict['url']
         types = mydict['type']
+        
+        # Check only video playlists, because for now, we have video or video + audio playlists (zero only audio)
+        if types[i] == 'audio':
+            continue
         
         deleted = check_playlist(urls[i], paths[i], types[i])
         for x in deleted:
