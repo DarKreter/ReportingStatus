@@ -13,7 +13,7 @@ def get_files_from_path(path, typee):
     if typee == 'video':
         ext = 'mkv'
     elif typee == 'audio':
-        ext = 'webm'
+        ext = 'ogg'
     
     files_list = []
     with os.scandir(path) as entries:

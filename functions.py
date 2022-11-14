@@ -2,19 +2,28 @@ import discord
 from unidecode import unidecode
 from client import client
 import globalVar
-from playlist_checker import get_missing_files
+from playlist_checker import get_missing_files, get_mismatched_playlists
 import utils
 
 
 def check_playlists():
+    mismatched_playlists = get_mismatched_playlists()
     # missing_files = []
     # missing_files = [('「KDABAMV」', 'Akame Ga Kill - Natural 「KDABAMV」'), ('「KDABAMV」', 'Anime MIX - Surrender 「KDABAMV」')]
     missing_files = get_missing_files()
 
-    if len(missing_files) == 0:
+    if len(missing_files) == 0 and len(mismatched_playlists) == 0:
         _value = "__Everything is up to date!__ （＾ω＾）"
     else:
         _value = "Some videos are **__missing__**: (๑˃̣̣̥⌓˂̣̣̥)\n\n"
+        
+    if len(mismatched_playlists) != 0:
+        for playlist, typee, local, yt in mismatched_playlists:
+            _value+="'**{}**' (*{}*): **Local** size: __{}__, **Playlist** size: __{}__!\n".format(
+                                                                    playlist, typee, local, yt)
+        _value += "‎\n"
+        
+    if len(missing_files) != 0:
         for playlist, title in missing_files:
             _value+="'**{}**' from '**{}**'!\n".format(title,playlist)
             

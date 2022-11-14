@@ -80,4 +80,28 @@ def get_missing_files():
 
     return missing_files
 
+
+  
+def get_mismatched_playlists():
+    # Read watched playlists
+    df = pd.read_csv('watchlist/playlists.csv', delimiter=';')
+    mydict = df.to_dict(orient='list')
+
+    problems = []
+    for i in range(len(mydict['name'])):
+        names = mydict['name']
+        paths = mydict['path']
+        urls = mydict['url']
+        types = mydict['type']
         
+        # Check only video playlists, because for now, we have video or video + audio playlists (zero only audio)
+        # if types[i] == 'audio':
+        #     continue
+        local_files = len(get_files_from_path(paths[i], types[i]))
+        yt_files = len(Playlist(urls[i]))
+        
+        if local_files != yt_files:
+            problems.append( (names[i], types[i], local_files, yt_files) )
+
+    return problems
+    
