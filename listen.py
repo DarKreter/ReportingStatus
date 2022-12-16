@@ -39,6 +39,20 @@ async def on_message(message):
         output = executeBashCommand(command).decode("utf-8")
         await message.channel.send(output)
         
+    elif messLC == "!youtube_autodownload":
+        print("{}:".format(datetime.now()))
+        print("Request to do report from {}".format(client.user))
+        command = ["supervisorctl", "start", "YouTube_autodownload"]
+        output = executeBashCommand(command).decode("utf-8")
+        await message.channel.send(output)
+        
+    elif messLC == "!smart_backup":
+        print("{}:".format(datetime.now()))
+        print("Request to do report from {}".format(client.user))
+        command = ["supervisorctl", "start", "smart_backup"]
+        output = executeBashCommand(command).decode("utf-8")
+        await message.channel.send(output)
+        
 
 client.run(TOKEN)
 
