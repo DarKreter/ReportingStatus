@@ -13,8 +13,12 @@ def get_files_from_url(playlist_url, typee):
     file_list = manager.list()
     lock = multiprocessing.Lock()
     
+    print('-'*100)
+    print("Now checking {}!".format(playlist.title))
+    print('-'*100)
     for url in playlist.video_urls:
         video = YouTube(url, use_oauth=True, allow_oauth_cache=True)
+        # check_single_url(video, typee, file_list,lock)
         process = multiprocessing.Process(target=check_single_url, args=(video, typee, file_list,lock,))
         process.start()
         threads.append(process)
@@ -26,13 +30,14 @@ def get_files_from_url(playlist_url, typee):
 
 def check_single_url(video, typee, file_list, lock):
     try:
+        print("Started...")
         if typee == 'video':
             df = video.streams.filter(only_video=True).order_by('resolution').desc()[0].default_filename
         elif typee == 'audio':
             df = video.streams.filter(only_audio=True).order_by('abr').desc()[0].default_filename
             
         filename = df.split('.')[0]
-        
+        print("Checked {}...".format(filename))
         with lock:
             file_list.append(filename)
             
