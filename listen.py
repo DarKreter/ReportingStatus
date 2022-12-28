@@ -54,5 +54,9 @@ async def on_message(message):
         await message.channel.send(output)
         
 
+import os
+# Lower priority
+os.nice(2)
+
 client.run(TOKEN)
 

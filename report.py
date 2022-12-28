@@ -46,6 +46,9 @@ async def on_ready():
     # exit
     await client.close()
 
+import os
+# Lower priority
+os.nice(10)
 
 client.run(TOKEN)
 
